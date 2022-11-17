@@ -107,7 +107,7 @@ class Scrapper:
         palabras_ignoradas = set(['a', 'ante', 'con', 'contra', 'de', 'desde', 'durante', 'en', 'para', 'por', 'segun', 'sin', 'sobre', 'el', 'la', 'los', 'las',
                                   '...', 'y', 'hoy', 'este', 'cuanto',  'un', 'del', 'las',  'que', 'con', 'todos',  'es', '¿qué',  'como', 'cada',
                                   'jueves', '¿cuanto', 'hoy', 'al', 'cual', 'se', 'su', 'sus', 'lo', 'una', 'un', 'tiene',
-                                  'le', 'habia'])
+                                  'le', 'habia', 'no', 'mas'])
 
         wordcloud = WordCloud(width=1920, height=1080, stopwords=palabras_ignoradas).generate(
             palabras_para_wordcloud)
@@ -117,6 +117,8 @@ class Scrapper:
     def run(self):
         self.recorre_diarios()
         dataframe_noticias = self.formateo_noticias()
+        if dataframe_noticias.empty:
+            return
         self.sentimientos(dataframe_noticias)
         self.apila_diarios_historicos()
         palabras_para_wordcloud = self.transforma_letras_para_wordcloud(
