@@ -5,7 +5,7 @@ import time
 from bs4 import BeautifulSoup
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-from diarios_rss import diarios
+from diarios_rss import getDiarios
 import agrega_sentimientos
 import datetime as dt
 import streamlit as st
@@ -17,6 +17,7 @@ class Scrapper:
 
     def recorre_diarios(self):
         contador = 0
+        diarios = getDiarios()
         for diario in diarios:
             try:
                 print(f"Obteniendo noticias de {diarios[diario]['diario']} ,seccion {diarios[diario]['seccion']} ")
