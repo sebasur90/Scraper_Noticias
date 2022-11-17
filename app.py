@@ -48,7 +48,7 @@ noticias=noticias.drop('descripcion' ,axis=1)
 fechas = pd.read_csv('./fechas.csv')
 
 
-with open('diarios.csv', 'r') as f:
+with open('./diarios.csv', 'r') as f:
     reader = csv.reader(f)
     diarios = set()
     secciones = set()
@@ -107,7 +107,7 @@ if st.session_state["configurar_fuentes"]:
     rss = st.text_input('RSS', 'RSS')
     filas = []
     eliminables = []
-    with open('diarios.csv', 'r') as f:
+    with open('./diarios.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             filas.append(row)
@@ -124,7 +124,7 @@ if st.session_state["configurar_fuentes"]:
                     st.error("Ya existe esa fuente")
                     break
             else:  #no break       
-                with open('diarios.csv', 'w') as f:
+                with open('./diarios.csv', 'w') as f:
                     filas.append([diario, seccion, rss])
                     eliminables.append([diario, seccion])
                     writer = csv.writer(f)
@@ -137,7 +137,7 @@ if st.session_state["configurar_fuentes"]:
     eliminar = st.selectbox('Eliminar', eliminables)
     if st.button('Eliminar'):
         if len(filas) > 2:
-            with open('diarios.csv', 'w') as f:
+            with open('./diarios.csv', 'w') as f:
                 writer = csv.writer(f)
                 for row in filas:
                     if row[0] == eliminar[0] and row[1] == eliminar[1]:
