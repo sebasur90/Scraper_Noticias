@@ -43,9 +43,9 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 scrapper = Scrapper()
 
-noticias = pd.read_csv('./diarios/diarios_historicos.csv')
+noticias = pd.read_csv('diarios/diarios_historicos.csv')
 noticias=noticias.drop('descripcion' ,axis=1)
-fechas = pd.read_csv('./fechas.csv')
+fechas = pd.read_csv('fechas.csv')
 
 
 with open('diarios.csv', 'r') as f:

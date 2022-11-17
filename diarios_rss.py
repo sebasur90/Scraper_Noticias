@@ -1,12 +1,12 @@
 import csv
 import os
-if not os.path.exists('./diarios.csv'): # valores por defecto
-    with open('./diarios.csv', 'w') as f:
+if not os.path.exists('diarios.csv'): # valores por defecto
+    with open('diarios.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(["diario", "seccion", "rss"])
         writer.writerow(["Telam", "Economia", "https://www.telam.com.ar/rss2/economia.xml"])
-if not os.path.exists('./diarios/diarios_historicos.csv'): # valores por defecto
-    with open('./diarios/diarios_historicos.csv', 'w') as f:
+if not os.path.exists('diarios/diarios_historicos.csv'): # valores por defecto
+    with open('diarios/diarios_historicos.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(["diario", "seccion", "titulo", "descripcion", "sentimiento", "pond_negativos", "pond_neutro", "pond_positivo"])
 
