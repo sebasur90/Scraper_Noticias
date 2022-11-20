@@ -1,73 +1,22 @@
-diarios={0:{'diario':'Telam',
-    'seccion':'Politica',
-    'rss': 'https://www.telam.com.ar/rss2/politica.xml'} ,
-    1: {'diario':'Telam',
-    'seccion':'Economia',
-    'rss': 'https://www.telam.com.ar/rss2/economia.xml' },
-    2 : {'diario':'Telam',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.telam.com.ar/rss2/ultimasnoticias.xml' }   ,    
-    3 : {'diario':'Clarin',
-    'seccion':'Politica',
-    'rss': 'https://www.clarin.com/rss/politica/' }  ,
-    4 : {'diario':'Clarin',
-    'seccion':'Economia',
-    'rss': 'https://www.clarin.com/rss/economia/' }  ,
-    5 : {'diario':'Clarin',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.clarin.com/rss/lo-ultimo/' }  ,      
-    6 : {'diario':'Ambito',
-    'seccion':'Politica',
-    'rss': 'https://www.ambito.com/rss/politica.xml' }  ,
-    7 : {'diario':'Ambito',
-    'seccion':'Economia',
-    'rss': 'https://www.ambito.com/rss/economia.xml' }  ,
-    8 : {'diario':'Ambito',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.ambito.com/rss/ultimas-noticias.xml' }  ,        
-    9 : {'diario':'Pagina_12',
-    'seccion':'Economia',
-    'rss': 'https://www.pagina12.com.ar/rss/secciones/economia/notas' }  ,
-    10 : {'diario':'Pagina_12',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.pagina12.com.ar/rss/secciones/el-pais/notas' },       
-    11 : {'diario':'Perfil',
-    'seccion':'Politica',
-    'rss': 'https://www.perfil.com/feed/politica' }  ,
-    12 : {'diario':'Perfil',
-    'seccion':'Economia',
-    'rss': 'https://www.perfil.com/feed/economia' }  ,
-    13 : {'diario':'Perfil',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.perfil.com/feed' } ,       
-    14 : {'diario':'Cronica',
-    'seccion':'Politica',
-    'rss': 'https://www.diariocronica.com.ar/rss/politica/' }  ,
-    15 : {'diario':'Cronica',
-    'seccion':'Economia',
-    'rss': 'https://www.diariocronica.com.ar/rss/economia/' }  ,
-    16 : {'diario':'Cronica',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.diariocronica.com.ar/rss/actualidad/' },    
-    17 : {'diario':'La_nacion',
-    'seccion':'Politica',
-    'rss': 'http://contenidos.lanacion.com.ar/herramientas/rss/categoria_id=30' }  ,
-    18 : {'diario':'La_nacion',
-    'seccion':'Economia',
-    'rss': 'http://contenidos.lanacion.com.ar/herramientas/rss/categoria_id=272' }  ,
-    19 : {'diario':'La_nacion',
-    'seccion':'ultimas_noticias',
-    'rss': 'http://contenidos.lanacion.com.ar/herramientas/rss/origen=2' },        
-    20 : {'diario':'La_izquierda_diario',
-    'seccion':'Politica',
-    'rss': 'http://www.laizquierdadiario.com/spip.php?page=backend&id_mot=12' }  ,
-    21 : {'diario':'La_izquierda_diario',
-    'seccion':'Economia',
-    'rss': 'http://www.laizquierdadiario.com/spip.php?page=backend&id_mot=13' }  ,
-    22 : {'diario':'La_izquierda_diario',
-    'seccion':'ultimas_noticias',
-    'rss': 'http://www.laizquierdadiario.com/spip.php?page=backend_portada' },         
-    23 : {'diario':'Minuto_ar',
-    'seccion':'ultimas_noticias',
-    'rss': 'https://www.minutoar.com.ar/rss/un_foto.html' } 
-}
+import csv
+import os
+if not os.path.exists('./diarios.csv'): # valores por defecto
+    with open('./diarios.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(["diario", "seccion", "rss"])
+        writer.writerow(["Telam", "Economia", "https://www.telam.com.ar/rss2/economia.xml"])
+if not os.path.exists('./diarios/diarios_historicos.csv'): # valores por defecto
+    with open('./diarios/diarios_historicos.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(["diario", "seccion", "titulo", "descripcion", "sentimiento", "pond_negativos", "pond_neutro", "pond_positivo"])
+def getDiarios():
+    with open('./diarios.csv', 'r') as f:
+        reader = csv.reader(f)
+        diarios = {}
+        n = 0
+        for row in reader:
+            if row[0] == 'diario':
+                continue
+            diarios[n] = {'diario': row[0], 'seccion': row[1], 'rss' : row[2]}
+            n += 1
+    return diarios
